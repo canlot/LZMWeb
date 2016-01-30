@@ -18,5 +18,15 @@ class GetLinks
     {
         $this->mysqli = new mysqli($host, $user, $password, $db); 
     }
+    public function checkConnection()
+    {
+        if($this->mysqli->connect_errno)
+            return FALSE;
+        return TRUE;
+    }
+    public function getLinks($theme, $user = FALSE)
+    {
+        
+    }
     //put your code here
 }
