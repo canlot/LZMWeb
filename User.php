@@ -10,7 +10,18 @@ class User
 {
     private $id;
     private $name;
-    public function __construct($id, $name)
+    public function __construct()
+    {
+        
+    }
+    public function loadFromSession()
+    {
+        if(isset($_SESSION['user']))
+            $this->name = $_SESSION['user'];
+        if(isset($_SESSION['userid']))
+            $this->id = $_SESSION['userid'];
+    }
+    public function loadFromDatabase($name, $password)
     {
         
     }
