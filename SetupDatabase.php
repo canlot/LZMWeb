@@ -101,7 +101,7 @@ class SetupDatabase
         $query = "create table User(" +
                 "id int auto_increment primary key, " +
                 "name varchar(50) not null, " +
-                "password varchar(50) not null, " +
+                "password varchar(50) not null " +
                 ");";
         if($this->mysqli->query($query) === TRUE)
             return TRUE;
