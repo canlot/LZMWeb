@@ -1,5 +1,5 @@
 <?php
-
+require_once 'config/DatabaseInformation.php';
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -14,9 +14,9 @@
 class GetLinks 
 {
     private $mysqli = null;
-    public function __construct($host, $user, $password, $db)
+    public function __construct()
     {
-        $this->mysqli = new mysqli($host, $user, $password, $db); 
+        $this->mysqli = new mysqli(\DBInfo\DbHost, \DBInfo\DbUser, \DBInfo\DbPassword, \DBInfo\DbName); 
     }
     public function checkConnection()
     {
@@ -33,7 +33,9 @@ class GetLinks
                 "on Theme.id = Relation.theme " +
                 "where Theme.theme = '" + $theme + "'";
         if($user != FALSE)
-            $query += " and Links.user = " + $user->id + "";
+            $query += " and Links.user = " + $user->getUserId() + "";
+        else
+            $query += " and Links.user = ";
         
         $result = $this->mysqli->query($query);
         
@@ -44,6 +46,10 @@ class GetLinks
             {
                 array_push($return, $row["link"]);
             }
+        }
+        else
+        {
+            return FALSE;
         }
         return $return;
         

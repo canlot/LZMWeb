@@ -56,4 +56,12 @@ class User
         $_SESSION["userid"] = $this->id;
         $_SESSION["user"] = $this->name;
     }
+    public function getUserId()
+    {
+        return $this->id;
+    }
+    public function getUserName()
+    {
+        return $this->name;
+    }
 }

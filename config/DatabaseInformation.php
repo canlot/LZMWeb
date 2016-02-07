@@ -6,8 +6,8 @@
  * and open the template in the editor.
  */
 
-$DbName = "LzmWeb";
-$DbHost = "localhost";
-$DbUser = "root";
-$DbPassword = "";
+const DbName = "LzmWeb";
+const DbHost = "localhost";
+const DbUser = "root";
+const DbPassword = "";
 
