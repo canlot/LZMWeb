@@ -13,8 +13,14 @@ require_once 'config/TemplateInformation.php';
  */
 class View
 {
+    private $controller = null;
+    public function __construct(Controller $controller)
+    {
+        $this->controller = $controller;
+    }
     public function show()
     {
         require 'templates/' . \TInfo\Template . '/index.php';
+        receiveController($this->controller);
     }
 }
