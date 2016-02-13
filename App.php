@@ -13,13 +13,10 @@
     
     function init()
     {
-        global $controller;
-        global $view;
         $controller = new Controller();
         $view = new View($controller);
     }
     function run()
     {
-        global $view;
         $view->show();
     }

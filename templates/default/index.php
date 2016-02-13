@@ -1,7 +1,4 @@
-<?php
-    require_once $GLOBALS['BaseDir'] . '/App.php';
 
-?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -23,8 +20,7 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-            require_once 'SearchResults.php';
-            receiveControllerResults($controller);
+            include_once 'SearchResults.php';
         ?>
     </body>
 </html>

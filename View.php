@@ -20,7 +20,6 @@ class View
     }
     public function show()
     {
-        require 'templates/' . \TInfo\Template . '/index.php';
-        receiveController($this->controller);
+        include_once 'templates/' . TInfo\Template . "/index.php";
     }
 }
