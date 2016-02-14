@@ -5,18 +5,4 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-    require_once 'Controller.php';
-    require_once 'View.php';
-    $controller = NULL;
-    $view = NULL;
-    $GLOBALS['BaseDir'] = __DIR__;
-    
-    function init()
-    {
-        $controller = new Controller();
-        $view = new View($controller);
-    }
-    function run()
-    {
-        $view->show();
-    }
+   
