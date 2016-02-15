@@ -23,8 +23,8 @@ class User
     }
     public function loadFromDatabase($name, $password)
     {
-        $connection = new mysqli(\DBInfo\DbHost, \DBInfo\DbUser, 
-                \DBInfo\DbPassword, \DBInfo\DbName);
+        $connection = new mysqli(DBInfo\DbHost, DBInfo\DbUser, 
+                DBInfo\DbPassword, DBInfo\DbName);
         if($connection->connect_errno)
             return "Verbindung konnte nicht hergestellt werden";
         $query = "select id, name from User where name = '?' and password = '?'";

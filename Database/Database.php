@@ -10,26 +10,71 @@
  * Description of Database
  *
  * @author Jakob
+ * 
  */
 class Database 
 {
-    private $connection = NULL;
-    public function __construct()
+    private $conn = null;
+    public function __construct($host, $user, $password, $database)
     {
-        $this->connection = new mysqli(DBInfo\DbHost, DBInfo\DbUser, 
-                DBInfo\DbPassword, DBInfo\DbName);
+        $this->conn = new \mysqli($host, $user, $password, $database);
     }
-    
-    public function readDataArray($query)
+    public function getDataArray($query, $args)
+    {
+        $param_array = array_merge($this->giveParameterFromArgs($args),
+                                    $this->giveValuesFromArgs($args));
+        $stmt = $this->conn->prepare($query);
+        //ruft $stmt->bin_param auf mit dynamischen Anzahl an Argumenten
+        call_user_func_array(array($stmt,'bind_param'), $param_array); 
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if($result->num_rows == 0)
+            return FALSE;
+        $array = array();
+        while($row = $result->fetch_assoc())
+        {
+            $array[] = $row;
+        }
+        return $array;
+    }
+    public function getSingleData($query, $args)
     {
         
     }
-    public function readSingleData($query)
+    public function setData($query, $args)
     {
         
     }
-    public function writeData($query)
+    private function giveValuesFromArgs($args)
     {
-        
+        $values = array();
+        foreach ($args as $key => $value)
+        {
+            $values[] = $value;
+        }
+        return $values;
+    }
+    private function giveParameterFromArgs($args)
+    {
+        $params = "";
+        foreach ($args as $key => $value)
+        {
+            switch ($key)
+            {
+                case "int":
+                    $params .= 'i';
+                    break;
+                case "string":
+                    $params .= 's';
+                    break;
+                case "double":
+                    $params .= 'd';
+                    break;
+                case "blob":
+                    $params .= 'b';
+                    break;
+            }
+        }
+        return $params;
     }
 }
