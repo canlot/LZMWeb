@@ -17,7 +17,7 @@ class Database
     private $conn = null;
     public function __construct($host, $user, $password, $database)
     {
-        $this->conn = new \mysqli($host, $user, $password, $database);
+        $this->conn = new mysqli($host, $user, $password, $database);
     }
     public function getDataArray($query, $args)
     {
@@ -35,6 +35,8 @@ class Database
         {
             $array[] = $row;
         }
+        $result->free();
+        $stmt->close();
         return $array;
     }
     public function getSingleData($query, $args)
