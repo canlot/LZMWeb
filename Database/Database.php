@@ -17,17 +17,25 @@ class Database
     private $conn = null;
     public function __construct($host, $user, $password, $database)
     {
-        $this->conn = new mysqli($host, $user, $password, $database);
+        $this->conn = new \mysqli($host, $user, $password, $database);
     }
     public function getDataArray($query, $args)
     {
-        $param_array = array_merge($this->giveParameterFromArgs($args),
-                                    $this->giveValuesFromArgs($args));
-        $stmt = $this->conn->prepare($query);
-        //ruft $stmt->bin_param auf mit dynamischen Anzahl an Argumenten
-        call_user_func_array(array($stmt,'bind_param'), $param_array); 
-        $stmt->execute();
-        $result = $stmt->get_result();
+        $result;
+        $stmt;
+        if(count($args) > 0)
+        {
+            $stmt = $this->conn->prepare($query);
+            //ruft $stmt->bin_param auf mit dynamischen Anzahl an Argumenten
+            call_user_func_array(array($stmt,'bind_param'), 
+                array_merge(array($this->giveParameterFromArgs($args)), $this->giveValuesFromArgs($args))); 
+            $stmt->execute();
+            $result = $stmt->get_result();
+        }
+        else
+        {
+            $result = $this->conn->query($query);
+        }
         if($result->num_rows == 0)
             return FALSE;
         $array = array();
@@ -36,7 +44,6 @@ class Database
             $array[] = $row;
         }
         $result->free();
-        $stmt->close();
         return $array;
     }
     public function getSingleData($query, $args)
