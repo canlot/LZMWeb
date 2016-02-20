@@ -13,10 +13,15 @@ require_once 'config/TemplateInformation.php';
  */
 class View
 {
+    private $data = array();
     private $controller = null;
     public function __construct(Controller $controller)
     {
         $this->controller = $controller;
+    }
+    public function processRequestAndData()
+    {
+        
     }
     public function show()
     {
