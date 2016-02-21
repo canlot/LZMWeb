@@ -17,8 +17,17 @@ class GetLinks extends Module
     {
         parent::__construct($database);
     }
-    public function returnData()
-    {
-        
+    public function returnData(&$queries)
+    { 
+        $data = array();
+        $datareturn;
+        if(!isset($_GET["theme"]))
+            $data[] = ["theme" => FALSE];
+        else
+        {
+            $datareturn = $this->database->getDataArray($queries["getLinksWithoutUser"]);
+            $data[] = $datareturn;
+        }
+        return $data;
     }
 }
