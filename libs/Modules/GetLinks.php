@@ -17,17 +17,26 @@ class GetLinks extends Module
     {
         parent::__construct($database);
     }
-    public function returnData(&$queries)
+    public function returnData($queries)
     { 
+        $_GET["theme"] = "programmieren"; // nur zum testen
+        
+        $args = [
+            "string" => $_GET["theme"]
+        ];
         $data = array();
         $datareturn;
         if(!isset($_GET["theme"]))
-            $data[] = ["theme" => FALSE];
+            $data["theme"] = [FALSE];
         else
         {
-            $datareturn = $this->database->getDataArray($queries["getLinksWithoutUser"]);
-            $data[] = $datareturn;
+            $datareturn = $this->database->getDataArray($queries["getLinksWithoutUser"], $args);
+            $data[] = array_merge($datareturn, $data);
         }
         return $data;
+    }
+    public function returnName()
+    {
+        return "GetLinks";
     }
 }

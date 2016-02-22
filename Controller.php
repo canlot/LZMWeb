@@ -38,15 +38,4 @@ class Controller
             return TRUE;
         }
     }
-    public function getLinks($theme)
-    {
-        require_once 'libs/GetLinks.php';
-        $links = new GetLinks();
-        if($this->user == NULL)
-            $array = $links->getLinks ($theme);
-        else
-            $array = $links->getLinks ($theme, $user);
-        
-        return $array;
-    }
 }

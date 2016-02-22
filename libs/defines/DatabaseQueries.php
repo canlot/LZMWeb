@@ -6,17 +6,7 @@
  * and open the template in the editor.
  */
 
-$querys = [
-    "getLinksWithoutUser" => "select Links.link from Links " +
-                "inner join Relation " +
-                "on Links.id = Relation.link " +
-                "inner join Theme " +
-                "on Theme.id = Relation.theme " +
-                "where Theme.theme = '?' and Links.user = ''",
-    "getLinksWithUser" => "select Links.link from Links " +
-                "inner join Relation " +
-                "on Links.id = Relation.link " +
-                "inner join Theme " +
-                "on Theme.id = Relation.theme " +
-                "where Theme.theme = '?' and Links.user = ? "
+$queries = [
+    "getLinksWithoutUser" => "select Links.link as link from Links inner join Relation on Links.id = Relation.link inner join Theme on Theme.id = Relation.theme where Theme.theme = ?",
+    "getLinksWithUser" => "select Links.link from Links inner join Relation on Links.id = Relation.link inner join Theme on Theme.id = Relation.theme where Theme.theme = ? and Links.user = ? ",
 ];

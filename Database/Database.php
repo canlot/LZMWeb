@@ -19,6 +19,13 @@ class Database
     {
         $this->conn = new \mysqli($host, $user, $password, $database);
     }
+    public function validConnection()
+    {
+        if($this->conn->errno)
+            return "Keine Verbindung " . $this->conn->error;
+        return TRUE;
+    }
+
     public function getDataArray($query, $args)
     {
         $result;
@@ -27,8 +34,9 @@ class Database
         {
             $stmt = $this->conn->prepare($query);
             //ruft $stmt->bin_param auf mit dynamischen Anzahl an Argumenten
-            call_user_func_array(array($stmt,'bind_param'), 
-                array_merge(array($this->giveParameterFromArgs($args)), $this->giveValuesFromArgs($args))); 
+            //var_dump($this->conn);
+            call_user_func_array(array($stmt, 'bind_param'), 
+                    $this->makeValuesReferenced(array_merge(array($this->giveParameterFromArgs($args)), $this->giveValuesFromArgs($args)))); 
             $stmt->execute();
             $result = $stmt->get_result();
         }
@@ -43,6 +51,7 @@ class Database
         {
             $array[] = $row;
         }
+        
         $result->free();
         return $array;
     }
@@ -83,12 +92,19 @@ class Database
             }
         }
     }
+    private function makeValuesReferenced($arr)
+    {
+        $refs = array();
+        foreach($arr as $key => $value)
+            $refs[$key] = &$arr[$key];
+        return $refs;
+    }
     private function giveValuesFromArgs($args)
     {
         $values = array();
         foreach ($args as $key => $value)
         {
-            $values[] = $value;
+            $values[] = &$value;
         }
         return $values;
     }
