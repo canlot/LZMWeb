@@ -15,17 +15,29 @@
 class Database 
 {
     private $conn = null;
+    private $mysql_message;
+    private $mysql_ok;
     public function __construct($host, $user, $password, $database)
     {
-        $this->conn = new \mysqli($host, $user, $password, $database);
+        try
+        {
+            $this->conn = new \mysqli($host, $user, $password, $database);
+            $this->mysql_ok = TRUE;
+        }
+        catch (\mysqli_sql_exception $e)
+        {
+            $this->mysql_message = $e->getMessage();
+            $this->mysql_ok = FALSE;
+        }
+    }
+    public function errorMessage()
+    {
+        return $this->mysql_message;
     }
     public function validConnection()
     {
-        if($this->conn->errno)
-            return "Keine Verbindung " . $this->conn->error;
-        return TRUE;
+        return $this->mysql_ok;
     }
-
     public function getDataArray($query, $args)
     {
         $result;
@@ -34,7 +46,6 @@ class Database
         {
             $stmt = $this->conn->prepare($query);
             //ruft $stmt->bin_param auf mit dynamischen Anzahl an Argumenten
-            //var_dump($this->conn);
             call_user_func_array(array($stmt, 'bind_param'), 
                     $this->makeValuesReferenced(array_merge(array($this->giveParameterFromArgs($args)), $this->giveValuesFromArgs($args)))); 
             $stmt->execute();
