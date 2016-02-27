@@ -24,7 +24,8 @@
                         </div>
                         <div class="panel-body">
                 <?php
-                    if(file_exists("./config/DatabaseInformationgh.php"))
+                    if(file_exists("./config/DatabaseInformation"
+                            . ".php"))
                     {
                         echo '<div class ="alert alert-success" role="alert">' . 'Datenbank Konfigurationsdatei gefunden' . '</div>';
                         require './Database/Database.php';

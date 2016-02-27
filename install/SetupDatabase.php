@@ -17,7 +17,16 @@ class SetupDatabase
     private $mysqli = null;
     public function __construct($host, $user, $password, $db) 
     {
-        $this->mysqli = new mysqli($host, $user, $password, $db);
+        //$this->mysqli = new mysqli($host, $user, $password, $db);
+        try 
+        {
+            $this->mysqli = new mysqli($host, $user, $password);
+        } 
+        catch (mysqli_sql_exception $ex) 
+        {
+            
+        }
+        
     }
     private function connect()
     {
