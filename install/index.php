@@ -62,25 +62,25 @@
                                 <div class="form-group">
                                   <label for="inputHost" class="col-sm-4 control-label">Host</label>
                                   <div class="col-sm-8">
-                                    <input type="value" class="form-control" id="inputHost" placeholder="Host">
+                                    <input type="value" class="form-control" id="inputHost" name="inputHost" placeholder="Host">
                                   </div>
                                 </div>
                                 <div class="form-group">
                                   <label for="inputUser" class="col-sm-4 control-label">Benutzername</label>
                                   <div class="col-sm-8">
-                                    <input type="value" class="form-control" id="inputUser" placeholder="Benutzername">
+                                    <input type="value" class="form-control" id="inputUser" name="inputUser" placeholder="Benutzername">
                                   </div>
                                 </div>
                                 <div class="form-group">
                                   <label for="inputPassword" class="col-sm-4 control-label">Passwort</label>
                                   <div class="col-sm-8">
-                                    <input type="password" class="form-control" id="inputPassword" placeholder="Passwort">
+                                    <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Passwort">
                                   </div>
                                 </div>
                                 <div class="form-group">
                                   <label for="inputDbName" class="col-sm-4 control-label">Datanbankname</label>
                                   <div class="col-sm-8">
-                                    <input type="value" class="form-control" id="inputDbName" placeholder="Datenbank">
+                                    <input type="value" class="form-control" id="inputDbName" name="inputDbName" placeholder="Datenbank">
                                   </div>
                                 </div>
                                 <div class="form-group">
