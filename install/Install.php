@@ -1,4 +1,5 @@
 <?php
+defined("INSTALL") or die;
 require_once './Database/Database.php';
 $host = $_POST["inputHost"];
 $user = $_POST["inputUser"];
