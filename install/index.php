@@ -27,6 +27,7 @@
                         </div>
                         <div class="panel-body">
                 <?php
+                    $DbWork = false;
                     if(file_exists("./config/DatabaseInformation"
                             . ".php"))
                     {
@@ -37,17 +38,20 @@
                         if($database->validConnection())
                         {
                             echo '<div class ="alert alert-success" role="alert">' . 'Verbindung mit der Datenbank hergestellt' . '</div>';
+                            $DbWork = TRUE;
                         }
                         else
                         {
                             echo '<div class ="alert alert-danger" role="alert">' . 'Verbindung konnte nicht hergestellt werden';
                             echo '<span class="label label-danger">' . $database->errorMessage() . '</span>';
                             echo '</div>';
+                            $DbWork = FALSE;
                         }
                     }
                     else
                     {
                         echo '<div class ="alert alert-danger" role="alert">' . 'Datenbank Konfigurationsdatei nicht gefunden' . '</div>';
+                        $DbWork = FALSE;
                     }
 
 
@@ -55,6 +59,12 @@
                         </div>
                     </div>
                 </div>
+                <?php
+                    if(!$DbWork)
+                    {
+                        require 'Formular.php';
+                    }
+                ?>
             </div>
         </div>
     </body>

@@ -10,5 +10,8 @@ $database = $_POST["inputDbName"];
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+if(!isset($host) or !isset($user) or !isset($password) or !isset($database))
+{
+    
+}
 
