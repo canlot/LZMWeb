@@ -27,7 +27,7 @@
                         </div>
                         <div class="panel-body">
                 <?php
-                    $DbWork = false;
+                    $DbWork = FALSE;
                     if(file_exists("./config/DatabaseInformation"
                             . ".php"))
                     {
@@ -53,7 +53,7 @@
                         echo '<div class ="alert alert-danger" role="alert">' . 'Datenbank Konfigurationsdatei nicht gefunden' . '</div>';
                         $DbWork = FALSE;
                     }
-
+                    require 'Install.php';
 
                 ?>
                         </div>
