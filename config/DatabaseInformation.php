@@ -6,8 +6,8 @@
  * and open the template in the editor.
  */
 
-const DbName = "lzmwebtest";
+const DbName = "web";
 const DbHost = "localhost";
-const DbUser = "root";
-const DbPassword = "";
+const DbUser = "web";
+const DbPassword = "pass12345";
 
