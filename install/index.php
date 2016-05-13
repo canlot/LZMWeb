@@ -28,32 +28,35 @@
                         <div class="panel-body">
                 <?php
                     $DbWork = FALSE;
-                    if(file_exists("./config/DatabaseInformation"
-                            . ".php"))
+                    $NoSubmitForm = FALSE;
+                    require 'Install.php';
+                    if($NoSubmitForm)
                     {
-                        echo '<div class ="alert alert-success" role="alert">' . 'Datenbank Konfigurationsdatei gefunden' . '</div>';
-                        require './Database/Database.php';
-                        require './config/DatabaseInformation.php';
-                        $database = new DB\Database(DBInfo\DbHost, DBInfo\DbUser, DBInfo\DbPassword, DBInfo\DbName);
-                        if($database->validConnection())
+                        if(file_exists("./config/DatabaseInformation". ".php"))
                         {
-                            echo '<div class ="alert alert-success" role="alert">' . 'Verbindung mit der Datenbank hergestellt' . '</div>';
-                            $DbWork = TRUE;
+                            echo '<div class ="alert alert-success" role="alert">' . 'Datenbank Konfigurationsdatei gefunden' . '</div>';
+                            require_once './Database/Database.php';
+                            require_once './config/DatabaseInformation.php';
+                            $database = new DB\Database(DBInfo\DbHost, DBInfo\DbUser, DBInfo\DbPassword, DBInfo\DbName);
+                            if($database->validConnection())
+                            {
+                                echo '<div class ="alert alert-success" role="alert">' . 'Verbindung mit der Datenbank hergestellt' . '</div>';
+                                $DbWork = TRUE;
+                            }
+                            else
+                            {
+                                echo '<div class ="alert alert-danger" role="alert">' . 'Verbindung konnte nicht hergestellt werden';
+                                echo '<span class="label label-danger">' . $database->errorMessage() . '</span>';
+                                echo '</div>';
+                                $DbWork = FALSE;
+                            }
                         }
                         else
                         {
-                            echo '<div class ="alert alert-danger" role="alert">' . 'Verbindung konnte nicht hergestellt werden';
-                            echo '<span class="label label-danger">' . $database->errorMessage() . '</span>';
-                            echo '</div>';
+                            echo '<div class ="alert alert-danger" role="alert">' . 'Datenbank Konfigurationsdatei nicht gefunden' . '</div>';
                             $DbWork = FALSE;
                         }
                     }
-                    else
-                    {
-                        echo '<div class ="alert alert-danger" role="alert">' . 'Datenbank Konfigurationsdatei nicht gefunden' . '</div>';
-                        $DbWork = FALSE;
-                    }
-                    require 'Install.php';
 
                 ?>
                         </div>

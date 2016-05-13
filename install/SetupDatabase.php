@@ -51,7 +51,7 @@ class SetupDatabase
             $this->mysqli->close();
             return $returnValues;
         }
-        
+        return TRUE;
     }
     private function createTables()
     {
