@@ -21,40 +21,40 @@ require_once './Database/Database.php';
             if($conn->validConnection())
             {
                 $DbWork = TRUE;
-                if(file_exists("./config/DatabaseInformation". ".php"))
+                
+                try 
                 {
-                    try 
-                    {
+                    if(file_exists("./config/DatabaseInformation". ".php"))
                         unlink("./config/DatabaseInformation". ".php");
-                        $file_content = "<?php namespace DBInfo; " .
-                                "const DbName = \"" . $database . "\"; " .
-                                "const DbHost = \"" . $host . "\"; " .
-                                "const DbUser = \"" . $user . "\"; " .
-                                "const DbPassword = \"" . $password . "\"; ";
-                        file_put_contents("./config/DatabaseInformation". ".php", $file_content);
-                        require 'SetupDatabase.php';
-                        $setup = new SetupDatabase($host, $user, $password, $database);
-                        $returnvar = $setup->setUp();
-                        echo '<div class ="alert alert-success" role="alert">' . 'Verbindung mit der Datenbank hergestellt' . '</div>';
-                        echo '<div class ="alert alert-success" role="alert">' . 'Datenbank Konfigurationsdatei erstellt' . '</div>';
-                        if($returnvar)
-                        {
-                            echo '<div class ="alert alert-success" role="alert">' . 'Tabellen erstellt' . '</div>';
-                        }
-                        else
-                        {
-                            echo '<div class ="alert alert-danger" role="alert">' . 'Datenbank Konfigurationsdatei konnte nicht erstell werden';
-                            echo '<span class="label label-danger">' . $returnvar . '</span>';
-                            echo '</div>';
-                        }
-                    } 
-                    catch (Exception $exc) 
+                    $file_content = "<?php namespace DBInfo; " .
+                            "const DbName = \"" . $database . "\"; " .
+                            "const DbHost = \"" . $host . "\"; " .
+                            "const DbUser = \"" . $user . "\"; " .
+                            "const DbPassword = \"" . $password . "\"; ";
+                    file_put_contents("./config/DatabaseInformation". ".php", $file_content);
+                    require 'SetupDatabase.php';
+                    $setup = new SetupDatabase($host, $user, $password, $database);
+                    $returnvar = $setup->setUp();
+                    echo '<div class ="alert alert-success" role="alert">' . 'Verbindung mit der Datenbank hergestellt' . '</div>';
+                    echo '<div class ="alert alert-success" role="alert">' . 'Datenbank Konfigurationsdatei erstellt' . '</div>';
+                    if($returnvar)
                     {
-                        echo '<div class ="alert alert-danger" role="alert">' . 'Datenbank Konfigurationsdatei konnte nicht erstell werden';
-                        echo '<span class="label label-danger">' . $exc->getTraceAsString() . '</span>';
+                        echo '<div class ="alert alert-success" role="alert">' . 'Tabellen erstellt' . '</div>';
+                    }
+                    else
+                    {
+                        echo '<div class ="alert alert-danger" role="alert">' . 'Datenbank Konfigurationsdatei konnte nicht erstellt werden';
+                        echo '<span class="label label-danger">' . $returnvar . '</span>';
                         echo '</div>';
                     }
+                } 
+                catch (Exception $exc) 
+                {
+                    echo '<div class ="alert alert-danger" role="alert">' . 'Datenbank Konfigurationsdatei konnte nicht erstell werden';
+                    echo '<span class="label label-danger">' . $exc->getTraceAsString() . '</span>';
+                    echo '</div>';
                 }
+                
             }
             else
             {
