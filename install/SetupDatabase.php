@@ -14,23 +14,21 @@
 class SetupDatabase 
 {
     //put your code here
-    private $mysqli = null;
+    private $conn = null;
     public function __construct($host, $user, $password, $db) 
     {
-        //$this->mysqli = new mysqli($host, $user, $password, $db);
         try 
         {
-            $this->mysqli = new mysqli($host, $user, $password);
+            $this->conn = new mysqli($host, $user, $password, $db);
         } 
         catch (mysqli_sql_exception $ex) 
         {
             
         }
-        
     }
     private function connect()
     {
-        if($this->mysqli->connect_errno)
+        if($this->conn->connect_errno)
             return "Datenbank konnte nicht verbunden werden";
         return TRUE;
     }
@@ -38,17 +36,18 @@ class SetupDatabase
     {
         /////---Verbindung prüfen---/////
         $returnValues = $this->connect();
-        if($returnValues != TRUE)
+        if($returnValues !== TRUE)
         {
-            $this->mysqli->close();
+            $this->conn->close();
             return $returnValues;
         }
         
         /////---Tabellen reinschreiben---/////
         $returnValues = $this->createTables();
-        if($returnValues != TRUE)
+		
+        if($returnValues !== TRUE)
         {
-            $this->mysqli->close();
+            $this->conn->close();
             return $returnValues;
         }
         return TRUE;
@@ -56,65 +55,67 @@ class SetupDatabase
     private function createTables()
     {
         $returnValues = $this->createTableLinks();
-        if($returnValues != TRUE)
+        if($returnValues !== TRUE)
+		{
             return $returnValues;
-        
+		}
         $returnValues = $this->createTableTheme();
-        if($returnValues != TRUE)
+        if($returnValues !== TRUE)
             return $returnValues;
         
         $returnValues = $this->createTableRelation();
-        if($returnValues != TRUE)
+        if($returnValues !== TRUE)
             return $returnValues;
         
         $returnValues = $this->createTableUser();
-        if($returnValues != TRUE)
+        if($returnValues !== TRUE)
             return $returnValues;
         
         return TRUE;
     }
     private function createTableLinks()
     {
-        $query = "create table Links(" + 
-                "id int auto_increment primary key, " +
-                "link text not null, " +
-                "user int "+
+	
+        $query = "create table Links( " . 
+                "id int auto_increment primary key, " .
+                "link text not null, " .
+                "user int " .
                 ");";
-        if($this->mysqli->query($query) === TRUE)
-            return TRUE;
-        return "Tabelle Links konnte nicht erstellt werden";
+        if($this->conn->query($query) === FALSE)
+            return "Tabelle Links konnte nicht erstellt werden " . $this->conn->error;
+		return TRUE;
     }
     private function createTableTheme()
     {
-        $query = "create table Theme(" +
-                "id int auto_increment primary key, " +
-                "theme text not null" +
+        $query = "create table Theme( " .
+                "id int auto_increment primary key, " .
+                "theme text not null " .
                 ");";
-        if($this->mysqli->query($query) === TRUE)
-            return TRUE;
-        return "Tabelle Theme konnte nicht erstellt werden";
+        if($this->conn->query($query) === FALSE)
+            return "Tabelle Theme konnte nicht erstellt werden " . $this->conn->error;
+        return TRUE;
     }
     private function createTableRelation()
     {
-        $query = "create table Relation(" +
-                "id int auto_increment primary key, " +
-                "link int not null, " +
-                "theme int not null" +
+        $query = "create table Relation(" .
+                "id int auto_increment primary key, " .
+                "link int not null, " .
+                "theme int not null" .
                 ");";
-        if($this->mysqli->query($query) === TRUE)
-            return TRUE;
-        return "Tabelle Relation konnte nicht erstellt werden";
+        if($this->conn->query($query) === FALSE)
+            return "Tabelle Relation konnte nicht erstellt werden " . $this->conn->error; 
+        return TRUE;
     }
     private function createTableUser()
     {
-        $query = "create table User(" +
-                "id int auto_increment primary key, " +
-                "name varchar(50) not null, " +
-                "password varchar(50) not null " +
+        $query = "create table User(" .
+                "id int auto_increment primary key, " .
+                "name varchar(50) not null, " .
+                "password varchar(50) not null " .
                 ");";
-        if($this->mysqli->query($query) === TRUE)
-            return TRUE;
-        return "Tabelle User konnte nicht erstellt werden";
+        if($this->conn->query($query) === FALSE)
+            return "Tabelle User konnte nicht erstellt werden " . $this->conn->error; 
+        return TRUE;
     }
     
 }

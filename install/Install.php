@@ -18,10 +18,6 @@ require_once './Database/Database.php';
         else
         {
             $conn = new \DB\Database($host, $user, $password, $database);
-            echo $host;
-            echo $user;
-            echo $password;
-            echo $database;
             if($conn->validConnection())
             {
                 $DbWork = TRUE;
@@ -31,16 +27,16 @@ require_once './Database/Database.php';
                     {
                         unlink("./config/DatabaseInformation". ".php");
                         $file_content = "<?php namespace DBInfo; " .
-                                "const DbName = \"" . $database . "\"" .
-                                "const DbHost = \"" . $host . "\"" .
-                                "const DbUser = \"" . $user . "\"" .
-                                "const DbPassword = \"" . $password . "\"";
+                                "const DbName = \"" . $database . "\"; " .
+                                "const DbHost = \"" . $host . "\"; " .
+                                "const DbUser = \"" . $user . "\"; " .
+                                "const DbPassword = \"" . $password . "\"; ";
                         file_put_contents("./config/DatabaseInformation". ".php", $file_content);
-                        echo '<div class ="alert alert-success" role="alert">' . 'Verbindung mit der Datenbank hergestellt' . '</div>';
-                        echo '<div class ="alert alert-success" role="alert">' . 'Datenbank Konfigurationsdatei erstellt' . '</div>';
                         require 'SetupDatabase.php';
                         $setup = new SetupDatabase($host, $user, $password, $database);
                         $returnvar = $setup->setUp();
+                        echo '<div class ="alert alert-success" role="alert">' . 'Verbindung mit der Datenbank hergestellt' . '</div>';
+                        echo '<div class ="alert alert-success" role="alert">' . 'Datenbank Konfigurationsdatei erstellt' . '</div>';
                         if($returnvar)
                         {
                             echo '<div class ="alert alert-success" role="alert">' . 'Tabellen erstellt' . '</div>';
