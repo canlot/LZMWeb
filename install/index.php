@@ -67,6 +67,17 @@
                     {
                         require 'Formular.php';
                     }
+                    else
+                    {
+                        if(isset($_POST["install_sample"]))
+                        {
+                            
+                        }
+                        else
+                        {
+                            echo '<a href="index.php?install_sample=true" class="btn btn-primary btn-lg active" role="button">Installiere Beispieldaten</a>';
+                        }
+                    }
                 ?>
             </div>
         </div>
