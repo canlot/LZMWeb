@@ -69,9 +69,18 @@
                     }
                     else
                     {
-                        if(isset($_POST["install_sample"]))
+                        if(isset($_GET["install_sample"]))
                         {
-                            
+                            require_once 'Samples.php';
+                            $samples = new Samples();
+                            if($samples->createSamples() === TRUE)
+                            {
+                                echo '<div class ="alert alert-success" role="alert">' . 'Beispieldaten wurden installiert' . '</div>';
+                            }
+                            else
+                            {
+                                echo '<div class ="alert alert-danger" role="alert">' . 'Beispieldaten konnten nicht installiert werden installiert' . '</div>';
+                            }
                         }
                         else
                         {

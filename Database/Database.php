@@ -70,38 +70,32 @@ class Database
     {
         
     }
-    public function setData($query, $args)
+    public function setDataParameterized($query, $args)
     {
         $result;
         $stmt;
         if(count($args) > 0)
         {
-            $stmt = $this->conn->prepare($query);
-            //ruft $stmt->bin_param auf mit dynamischen Anzahl an Argumenten
+            $stmt = $this->conn->prepare($query); //ruft $stmt->bin_param auf mit dynamischen Anzahl an Argumenten
             call_user_func_array(array($stmt,'bind_param'), 
                 array_merge(array($this->giveParameterFromArgs($args)), $this->giveValuesFromArgs($args))); 
+            
             $stmt->execute();
             if($stmt->affected_rows == 0)
-            {
                 return FALSE;
-            }
             else
-            {
                 return $stmt->insert_id;
-            }
         }
         else
-        {
-            $this->conn->query($query);
-            if($this->conn->affected_rows == 0)
-            {
-                return FALSE;
-            }
-            else
-            {
-                return $this->conn->insert_id;
-            }
-        }
+            return $this->setData($query);
+    }
+    public function setData($query)
+    {
+        $this->conn->query($query);
+        if($this->conn->affected_rows == 0)
+            return FALSE;
+        else
+            return $this->conn->insert_id;
     }
     private function makeValuesReferenced($arr)
     {
