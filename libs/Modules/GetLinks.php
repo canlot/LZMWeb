@@ -19,7 +19,7 @@ class GetLinks extends Module
     }
     public function returnData($queries)
     { 
-        $_GET["theme"] = "programmieren"; // nur zum testen
+        $_GET["theme"] = "Programmieren"; // nur zum testen
         
         $args = [
             "string" => $_GET["theme"]
@@ -31,7 +31,8 @@ class GetLinks extends Module
         else
         {
             $datareturn = $this->database->getDataArray($queries["getLinksWithoutUser"], $args);
-            $data[] = array_merge($datareturn, $data);
+            //$data = $datareturn;
+            $data = array_merge($datareturn, $data);
         }
         return $data;
     }

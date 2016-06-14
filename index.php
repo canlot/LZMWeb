@@ -3,7 +3,7 @@
             die('Du brauchst eine höhere Php Version');
     
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-    if(file_exists("install"))
+    if(!file_exists("install"))
         require 'install/index.php';
     else
     {
