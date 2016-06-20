@@ -10,9 +10,6 @@
         require_once 'Controller.php';
         require_once 'View.php';
         $controller = new Controller();
-        $view = new View($controller);
         $GLOBALS['BaseDir'] = __DIR__;
-
-        $view->processRequestAndData();
-        $view->show();
+        $controller->RUN();
     }

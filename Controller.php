@@ -2,6 +2,11 @@
 require_once 'User.php';
 require_once 'config/DatabaseInformation.php';
 require_once 'libs/defines/Defines.php';
+require_once 'libs/defines/DatabaseQueries.php';
+require_once 'Database/Database.php';
+
+/** MODULES INCLUDES **/
+require_once 'libs/Modules/GetLinks.php';
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -16,13 +21,39 @@ require_once 'libs/defines/Defines.php';
 class Controller 
 {
     public $user = null;
+    private $data = array();
+    private $modules = array();
+    private $database = null;
+    private $view = null;
     public function __construct()
     {
         session_start();
         if(isset($_SESSION['user']))
         {
-            $user = new User();
+            $this->user = new User();
             $this->user->loadFromSession();
+        }
+        $this->database = new DB\Database(DBInfo\DbHost, DBInfo\DbUser, DBInfo\DbPassword, DBInfo\DbName);
+        if(!$this->database->validConnection())
+            die("Konnte nicht verbunden werden");
+        
+        
+        $this->modules[] = new GetLinks($this->database);
+    }
+    public function RUN()
+    {
+        $this->processRequestAndData();
+        $this->view = new View($this->data);
+        $this->view->show();
+    }
+    public function processRequestAndData()
+    {
+        require 'libs/defines/DatabaseQueries.php';
+        foreach($this->modules as $module)
+        {
+            
+            $this->data = [$module->returnName() => $module->returnData($queries)];
+             
         }
     }
     public function authentificateUser($name, $password)

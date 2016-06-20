@@ -62,7 +62,6 @@ class Database
         {
             $array[] = $row;
         }
-        
         $result->free();
         return $array;
     }

@@ -7,13 +7,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-    //var_dump($this->data);
-    print_r($this->data);
+
     if(isset($this->data["GetLinks"]["theme"]))
         echo '<b>Keine Links unter diesem Thema</b>';
     else
     {
-        foreach($this->data["GetLinks"] as $value)
+        foreach($this->data["GetLinks"]["links"] as $value)
         {
             echo '<li>' . $value["link"] . '</li>';
         }

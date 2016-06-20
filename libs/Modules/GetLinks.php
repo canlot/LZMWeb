@@ -24,17 +24,12 @@ class GetLinks extends Module
         $args = [
             "string" => $_GET["theme"]
         ];
-        $data = array();
-        $datareturn;
+        $datareturn = array();
         if(!isset($_GET["theme"]))
             $data["theme"] = [FALSE];
         else
-        {
-            $datareturn = $this->database->getDataArray($queries["getLinksWithoutUser"], $args);
-            //$data = $datareturn;
-            $data = array_merge($datareturn, $data);
-        }
-        return $data;
+            $datareturn["links"] = $this->database->getDataArray($queries["getLinksWithoutUser"], $args);
+        return $datareturn;
     }
     public function returnName()
     {
