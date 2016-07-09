@@ -7,6 +7,7 @@ require_once 'Database/Database.php';
 
 /** MODULES INCLUDES **/
 require_once 'libs/Modules/GetLinks.php';
+require_once 'libs/Modules/GetTheme.php';
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -37,8 +38,9 @@ class Controller
         if(!$this->database->validConnection())
             die("Konnte nicht verbunden werden");
         
-        
+        //Modules will be added here
         $this->modules[] = new GetLinks($this->database);
+        $this->modules[] = new GetTheme($this->database);
     }
     public function RUN()
     {
@@ -51,9 +53,7 @@ class Controller
         require 'libs/defines/DatabaseQueries.php';
         foreach($this->modules as $module)
         {
-            
-            $this->data = [$module->returnName() => $module->returnData($queries)];
-             
+            $this->data[$module->returnName()] = $module->returnData($queries);
         }
     }
     public function authentificateUser($name, $password)

@@ -21,6 +21,7 @@ and open the template in the editor.
     <body>
         <?php
             include_once 'SearchResults.php';
+            include_once 'DisplayAllThemes.php';
         ?>
     </body>
 </html>
