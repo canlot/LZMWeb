@@ -7,7 +7,7 @@
     {
         foreach($this->data["GetTheme"]["themes"] as $value)
         {
-            echo '<a href="index.php?theme=' . $value["theme"] . '" class="list-group-item">' . $value["theme"] . '</a>';
+            echo '<a href="index.php?theme=' . urlencode($value["theme"]) . '" class="list-group-item">' . $value["theme"] . '</a>';
         }
     }
     

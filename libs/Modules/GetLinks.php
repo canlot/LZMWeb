@@ -12,7 +12,6 @@ class GetLinks extends Module
         
         if(!isset($_GET["theme"]))
             return;
-
         $args = [
             "string" => $_GET["theme"]
         ];
