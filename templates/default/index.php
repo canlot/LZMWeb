@@ -19,10 +19,25 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
+        <div class="container">
+            <div class="header clearfix">
+                <h1>Lesezeichen Manager</h1>
+                <nav>
+                    <ul class="nav nav-pills pull-right">
+                        <li role="presentation">
+                            <a href="index.php?site=main">Leszeichen ansehen</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="index.php?site=add">Lesezeichen hinzufügen</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         <?php
             include_once 'SearchResults.php';
             include_once 'DisplayAllThemes.php';
         ?>
+        </div>
     </body>
 </html>
 
