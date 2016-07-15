@@ -8,6 +8,7 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="templates/default/style/main.css">
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
@@ -19,20 +20,26 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <div class="container">
-            <div class="header clearfix">
-                <h1>Lesezeichen Manager</h1>
-                <nav>
-                    <ul class="nav nav-pills pull-right">
-                        <li role="presentation">
-                            <a href="index.php?site=main">Leszeichen ansehen</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="index.php?site=add">Lesezeichen hinzufügen</a>
-                        </li>
+        <div class="container" id="main-container">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Project name</a>
+                  </div>
+                  <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                      <li class="active"><a href="index.php?">Lesezeichen anzeigen</a></li>
+                      <li><a href="index.php?">Lesezeichen erstellen</a></li>
                     </ul>
-                </nav>
-            </div>
+                  </div><!--/.nav-collapse -->
+                </div><!--/.container-fluid -->
+            </nav>
         <?php
             include_once 'SearchResults.php';
             include_once 'DisplayAllThemes.php';
