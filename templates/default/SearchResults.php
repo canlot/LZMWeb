@@ -1,4 +1,4 @@
-<div>
+<div class="list-group col-md-6">
     <ul>
 <?php
     if(isset($this->data["GetLinks"]["links"]))
@@ -9,7 +9,7 @@
         {
             foreach($this->data["GetLinks"]["links"] as $value)
             {
-                echo '<li>' . $value["link"] . '</li>';
+                echo '<li class="list-group-item">' . $value["link"] . '</li>';
             }
         }
     }

@@ -30,7 +30,7 @@ and open the template in the editor.
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Project name</a>
+                    <a class="navbar-brand" href="#">LZM Web</a>
                   </div>
                   <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -41,8 +41,7 @@ and open the template in the editor.
                 </div><!--/.container-fluid -->
             </nav>
         <?php
-            include_once 'SearchResults.php';
-            include_once 'DisplayAllThemes.php';
+            include_once 'Display.php';
         ?>
         </div>
     </body>

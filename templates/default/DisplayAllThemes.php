@@ -1,4 +1,4 @@
-<div class="list-group">
+<div class="list-group col-md-6">
 
 <?php
     if(!isset($this->data["GetTheme"]["themes"]))
@@ -7,7 +7,10 @@
     {
         foreach($this->data["GetTheme"]["themes"] as $value)
         {
-            echo '<a href="index.php?theme=' . urlencode($value["theme"]) . '" class="list-group-item">' . $value["theme"] . '</a>';
+            $active_tag = "";
+            if(isset($_GET["theme"]) && $_GET["theme"] == $value["theme"])
+                $active_tag = "active";
+            echo '<a href="index.php?theme=' . urlencode($value["theme"]) . '" class="list-group-item ' . $active_tag .'">' . $value["theme"] . '</a>';
         }
     }
     
