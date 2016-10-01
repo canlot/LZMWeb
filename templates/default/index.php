@@ -1,4 +1,15 @@
-
+<?php
+    $sites = array("showbookmarks" => FALSE, "createbookmarks" => FALSE, "start" => FALSE);
+    if(isset($_GET["site"]))
+            {
+                if(array_key_exists($_GET["site"], $sites))
+                    $sites[$_GET["site"]] = TRUE;
+                else
+                    $sites["start"] = TRUE;
+            }
+            else
+                $sites["start"] = TRUE;
+?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -34,14 +45,19 @@ and open the template in the editor.
                   </div>
                   <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                      <li class="active"><a href="index.php?">Lesezeichen anzeigen</a></li>
-                      <li><a href="index.php?">Lesezeichen erstellen</a></li>
+                      <li class="<?php echo ($sites["showbookmarks"])?"active":"" ?>"><a href="index.php?site=showbookmarks">Lesezeichen anzeigen</a></li>
+                      <li class="<?php echo ($sites["createbookmarks"])?"active":"" ?>"><a href="index.php?site=createbookmarks">Lesezeichen erstellen</a></li>
                     </ul>
                   </div><!--/.nav-collapse -->
                 </div><!--/.container-fluid -->
             </nav>
         <?php
-            include_once 'Display.php';
+            if($sites["showbookmarks"])
+                include_once 'Display.php';
+            elseif($sites["createbookmarks"])
+                include_once 'CreateBookmark.php';
+            elseif($sites["start"])
+                include_once 'Start.php';
         ?>
         </div>
     </body>
