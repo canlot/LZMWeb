@@ -53,7 +53,7 @@ class Controller
         require 'libs/defines/DatabaseQueries.php';
         foreach($this->modules as $module)
         {
-            $this->data[$module->returnName()] = $module->returnData($queries);
+            $this->data[$module->returnName()] = $module->execute($queries);
         }
     }
     public function authentificateUser($name, $password)

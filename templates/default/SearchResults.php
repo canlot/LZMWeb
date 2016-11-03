@@ -9,7 +9,7 @@
         {
             foreach($this->data["GetLinks"]["links"] as $value)
             {
-                echo '<li class="list-group-item">' . $value["link"] . '</li>';
+                echo '<li class="list-group-item" style="width: 100%">' . $value["link"] . '</li>';
             }
         }
     }

@@ -18,7 +18,7 @@ class Module
     {
         $this->database = $database;
     }
-    public function returnData()
+    public function execute()
     {
         
     }

@@ -7,7 +7,7 @@ class GetTheme extends Module
     {
         parent::__construct($database);
     }
-    public function returnData($queries)
+    public function execute($queries)
     {
         $args = NULL;
         $datareturn = array();

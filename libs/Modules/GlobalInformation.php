@@ -19,7 +19,7 @@ class GlobalInformation extends Module
         parent::__construct($database);
         
     }
-    public function returnData()
+    public function execute()
     {
         
     }

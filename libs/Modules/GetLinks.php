@@ -7,7 +7,7 @@ class GetLinks extends Module
     {
         parent::__construct($database);
     }
-    public function returnData($queries)
+    public function execute($queries)
     { 
         
         if(!isset($_GET["theme"]))

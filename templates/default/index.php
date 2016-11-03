@@ -1,4 +1,5 @@
 <?php
+    $DisplayAllThemesSHOW = TRUE;
     $sites = array("showbookmarks" => FALSE, "createbookmarks" => FALSE, "start" => FALSE);
     if(isset($_GET["site"]))
             {
