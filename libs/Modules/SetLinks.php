@@ -8,6 +8,14 @@ class SetLinks extends Module
     }
     public function execute($querys)
     {
+        if(empty($_POST["bookmark"]))
+        {
+           return; 
+        }
+        $args = [
+            "string" => $_POST["bookmark"]
+        ];
+        $bookmarkId = $this->database->setDataParameterized($querys["setLink"], $args);
         
         if(!empty($_POST["theme"]))
         {
@@ -18,6 +26,10 @@ class SetLinks extends Module
                     "string" => $theme
                 ];
                 $id = $this->database->getDataArray($querys["getThemeId"], $args);
+                if($id == NULL)
+                {
+                    $id = $this->database->setDataParameterized($querys["setTheme"], $args);
+                }
             }
         }
         if(!empty($_POST["themes"]))
