@@ -6,5 +6,6 @@ $queries = [
     "getAllThemes" => "select theme from Theme",
     "getThemeId" => "select id from Theme where Theme.theme = ?",
     "setLink" => "insert into Links(link) values(?)",
-    "setTheme" => "insert into Theme(theme) values(?)"
+    "setTheme" => "insert into Theme(theme) values(?)",
+    "setRelation" => "insert into Relation(link, theme) values(?, ?)"
 ];

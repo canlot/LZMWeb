@@ -8,6 +8,7 @@ require_once 'Database/Database.php';
 /** MODULES INCLUDES **/
 require_once 'libs/Modules/GetLinks.php';
 require_once 'libs/Modules/GetTheme.php';
+require_once 'libs/Modules/SetLinks.php';
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -41,6 +42,7 @@ class Controller
         //Modules will be added here
         $this->modules[] = new GetLinks($this->database);
         $this->modules[] = new GetTheme($this->database);
+        $this->modules[] = new SetLinks($this->database);
     }
     public function RUN()
     {

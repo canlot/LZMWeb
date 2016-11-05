@@ -46,8 +46,9 @@ class Database
         {
             $stmt = $this->conn->prepare($query);
             //ruft $stmt->bin_param auf mit dynamischen Anzahl an Argumenten
-            call_user_func_array(array($stmt, 'bind_param'), 
-                    $this->makeValuesReferenced(array_merge(array($this->giveParameterFromArgs($args)), $this->giveValuesFromArgs($args)))); 
+            //call_user_func_array(array($stmt, 'bind_param'), 
+            //        $this->makeValuesReferenced(array_merge(array($this->giveParameterFromArgs($args)), $this->giveValuesFromArgs($args)))); 
+            call_user_func_array(array($stmt, 'bind_param'), array_merge(array($this->giveParameterFromArgs($args)), $this->giveValuesFromArgs($args))); 
             $stmt->execute();
             $result = $stmt->get_result();
         }
@@ -99,38 +100,30 @@ class Database
     private function makeValuesReferenced($arr)
     {
         $refs = array();
-        foreach($arr as $key => $value)
-            $refs[$key] = &$arr[$key];
+        foreach($arr as $plubsik)
+            $refs[] = &$plubsik[1];
         return $refs;
     }
     private function giveValuesFromArgs($args)
     {
         $values = array();
-        foreach ($args as $key => $value)
+        foreach ($args as $plubsik)
         {
-            $values[] = &$value;
+            $values[] = &$plubsik[1];
         }
         return $values;
     }
     private function giveParameterFromArgs($args)
     {
         $params = "";
-        foreach ($args as $key => $value)
+        foreach ($args as $plubsik)
         {
-            switch ($key)
+            switch ($plubsik[0])
             {
-                case "int":
-                    $params .= 'i';
-                    break;
-                case "string":
-                    $params .= 's';
-                    break;
-                case "double":
-                    $params .= 'd';
-                    break;
-                case "blob":
-                    $params .= 'b';
-                    break;
+                case "int": $params .= 'i'; break;
+                case "string": $params .= 's'; break;
+                case "double": $params .= 'd'; break;
+                case "blob": $params .= 'b'; break;
             }
         }
         return $params;

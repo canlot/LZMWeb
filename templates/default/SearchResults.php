@@ -1,5 +1,4 @@
-<div class="list-group col-md-6">
-    <ul>
+<ul class="list-group">
 <?php
     if(isset($this->data["GetLinks"]["links"]))
     {
@@ -14,5 +13,4 @@
         }
     }
 ?>
-    </ul>
-</div>
+</ul>

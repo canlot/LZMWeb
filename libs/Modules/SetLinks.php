@@ -12,9 +12,7 @@ class SetLinks extends Module
         {
            return; 
         }
-        $args = [
-            "string" => $_POST["bookmark"]
-        ];
+        $args = [["string", $_POST["bookmark"]]];
         $bookmarkId = $this->database->setDataParameterized($querys["setLink"], $args);
         
         if(!empty($_POST["theme"]))
@@ -22,25 +20,33 @@ class SetLinks extends Module
             $themes = explode(",", $_POST["theme"]);
             foreach ($themes as $theme)
             {
-                $args = [
-                    "string" => $theme
-                ];
-                $id = $this->database->getDataArray($querys["getThemeId"], $args);
-                if($id == NULL)
+                $args = [["string", $theme]];
+                $ret = $this->database->getDataArray($querys["getThemeId"], $args);
+                $themeId = $ret[0]["id"];
+                if($themeId == NULL)
                 {
-                    $id = $this->database->setDataParameterized($querys["setTheme"], $args);
+                    $themeId = $this->database->setDataParameterized($querys["setTheme"], $args);
                 }
+                $args = [["int", $bookmarkId], ["int", $themeId]];
+                $this->database->setDataParameterized($querys["setRelation"], $args);
             }
         }
         if(!empty($_POST["themes"]))
         {
             foreach ($_POST["themes"] as $theme)
             {
-                
-                
+                $args = [["string", $theme]];
+                $ret = $this->database->getDataArray($querys["getThemeId"], $args);
+                $themeId = $ret[0]["id"];
+                $args = [["int", $bookmarkId], ["int", $themeId]];
+                $this->database->setDataParameterized($querys["setRelation"], $args);
             }
         }
         
         
+    }
+    public function returnName()
+    {
+        return "SetLinks";
     }
 }

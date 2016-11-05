@@ -12,9 +12,7 @@ class GetLinks extends Module
         
         if(!isset($_GET["theme"]))
             return;
-        $args = [
-            "string" => $_GET["theme"]
-        ];
+        $args = [["string", $_GET["theme"]]];
         $datareturn = array();
         $datareturn["links"] = $this->database->getDataArray($queries["getLinksWithoutUser"], $args);
         return $datareturn;
