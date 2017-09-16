@@ -46,8 +46,10 @@ and open the template in the editor.
                   </div>
                   <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                      <li class="<?php echo ($sites["showbookmarks"])?"active":"" ?>"><a href="index.php?site=showbookmarks">Lesezeichen anzeigen</a></li>
-                      <li class="<?php echo ($sites["createbookmarks"])?"active":"" ?>"><a href="index.php?site=createbookmarks">Lesezeichen erstellen</a></li>
+                        <li class=""><a href="">Anmelden</a></li>
+                        <li class="<?php echo ($sites["showbookmarks"])?"active":"" ?>"><a href="index.php?site=showbookmarks">Lesezeichen anzeigen</a></li>
+                        <li class="<?php echo ($sites["createbookmarks"])?"active":"" ?>"><a href="index.php?site=createbookmarks">Lesezeichen erstellen</a></li>
+                        <li class=""><a href="">Lesezeichen löschen</a></li>
                     </ul>
                   </div><!--/.nav-collapse -->
                 </div><!--/.container-fluid -->
